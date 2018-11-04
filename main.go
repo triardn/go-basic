@@ -1,37 +1,34 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"math"
 )
 
 func main() {
-	// // basic loop
-	// for i := 0; i < 5; i++ {
-	// 	fmt.Println(i)
-	// }
+	// sum function
+	result := sum(17.4, 11.8)
+	fmt.Println(result)
 
-	// // while loop
-	// x := 0
-	// for x < 7 {
-	// 	fmt.Println(x)
-	// 	x++
-	// }
+	// try error handling
+	sqrtResult, errors := sqrt(-90)
 
-	// // array range loop
-	// arr := []int{1, 2, 3}
-
-	// for index, value := range arr {
-	// 	fmt.Println("index: ", index, "value: ", value)
-	// }
-
-	// map loop
-	trashcan := make(map[string]int)
-
-	trashcan["leaf"] = 7
-	trashcan["paper"] = 10
-	trashcan["plastic"] = 3
-
-	for key, value := range trashcan {
-		fmt.Println("key", key, "value", value)
+	if errors != nil {
+		fmt.Println(errors)
+	} else {
+		fmt.Println(sqrtResult)
 	}
+}
+
+func sum(x float64, y float64) float64 {
+	return x + y
+}
+
+func sqrt(x float64) (float64, error) {
+	if x < 0 {
+		return 0, errors.New("harus lebih besar dari 0")
+	}
+
+	return math.Sqrt(x), nil
 }
