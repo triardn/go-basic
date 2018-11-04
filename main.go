@@ -5,12 +5,19 @@ import (
 )
 
 func main() {
-	a := 7
-	if a < 4 {
-		fmt.Println("Kurang dari 4")
-	} else if a == 4 {
-		fmt.Println("Sama dengan 4")
-	} else {
-		fmt.Println("Lebih dari 4")
-	}
+	stock := make(map[string]int)
+
+	stock["milk"] = 4
+	stock["chees"] = 7
+	stock["mayonaise"] = 11
+
+	fmt.Println(stock)
+
+	stock["milk"] += 8
+
+	fmt.Println(stock)
+
+	delete(stock, "mayonaise")
+
+	fmt.Println(stock)
 }
