@@ -1,34 +1,31 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"math"
 )
 
+type Person struct {
+	Name string
+	Age  int
+}
+
 func main() {
-	// sum function
-	result := sum(17.4, 11.8)
-	fmt.Println(result)
+	p := Person{Name: "Tri", Age: 26}
 
-	// try error handling
-	sqrtResult, errors := sqrt(-90)
+	fmt.Println(p.Name)
 
-	if errors != nil {
-		fmt.Println(errors)
-	} else {
-		fmt.Println(sqrtResult)
-	}
-}
-
-func sum(x float64, y float64) float64 {
-	return x + y
-}
-
-func sqrt(x float64) (float64, error) {
-	if x < 0 {
-		return 0, errors.New("harus lebih besar dari 0")
+	// Array of struct
+	arrp := []Person{
+		{Name: "Tri", Age: 26},
+		{Name: "Tristan", Age: 3},
 	}
 
-	return math.Sqrt(x), nil
+	fmt.Println(arrp[1].Name)
+
+	// Traverse over array of struct
+	for _, elem := range arrp {
+		fmt.Println(elem.Name)
+		fmt.Println(elem.Age)
+		fmt.Println("")
+	}
 }
