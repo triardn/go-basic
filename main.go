@@ -2,17 +2,48 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"math"
 )
 
-func main() {
-	go timer("lompat")
-	timer("bobo")
+type geometry interface {
+	area() float64
+	perim() float64
 }
 
-func timer(todo string) {
-	for i := 1; i < 5; i++ {
-		fmt.Println(todo, i)
-		time.Sleep(time.Second)
-	}
+type rect struct {
+	widht, height float64
+}
+
+type circle struct {
+	radius float64
+}
+
+func (r rect) area() float64 {
+	return r.widht * r.height
+}
+
+func (r rect) perim() float64 {
+	return 2 * (r.height + r.widht)
+}
+
+func (c circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+
+func (c circle) perim() float64 {
+	return 2 * math.Phi * c.radius
+}
+
+func calculate(g geometry) {
+	fmt.Println(g)
+	fmt.Println(g.area())
+	fmt.Println(g.perim())
+}
+
+func main() {
+	r := rect{widht: 10, height: 6}
+	c := circle{radius: 14}
+
+	calculate(r)
+	calculate(c)
 }
