@@ -2,48 +2,25 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
-type geometry interface {
-	area() float64
-	perim() float64
+func HelloWorld(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello bosq")
 }
 
-type rect struct {
-	widht, height float64
-}
-
-type circle struct {
-	radius float64
-}
-
-func (r rect) area() float64 {
-	return r.widht * r.height
-}
-
-func (r rect) perim() float64 {
-	return 2 * (r.height + r.widht)
-}
-
-func (c circle) area() float64 {
-	return math.Pi * c.radius * c.radius
-}
-
-func (c circle) perim() float64 {
-	return 2 * math.Phi * c.radius
-}
-
-func calculate(g geometry) {
-	fmt.Println(g)
-	fmt.Println(g.area())
-	fmt.Println(g.perim())
+func handleRequests() {
+	// using gorilla mux
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", HelloWorld).Methods("GET")
+	log.Fatal(http.ListenAndServe(":8081", router))
 }
 
 func main() {
-	r := rect{widht: 10, height: 6}
-	c := circle{radius: 14}
+	fmt.Println("App running on port 8081")
 
-	calculate(r)
-	calculate(c)
+	handleRequests()
 }
